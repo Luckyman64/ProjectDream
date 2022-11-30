@@ -15,11 +15,14 @@ struct TopGameView: View {
                 
                 GameListView(games: viewModel.games)
                     .navigationTitle(Text("Top games"))
-                
+                ProgressView()
+                    .onAppear{
+                        Task {
+                            try? await viewModel.getGames()
+                        }
+                    }
                     
             }
-        }.task {
-            try? await viewModel.getGames()
         }
         
     }
