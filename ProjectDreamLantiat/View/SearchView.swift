@@ -8,11 +8,23 @@
 import SwiftUI
 
 struct SearchView: View {
+    @StateObject var viewModel: GameViewModel
     @State private var searchText = ""
     var body: some View {
         NavigationView{
-            Text("Yo")
-        }.searchable(text: $searchText)
+            List{
+                
+                GameListView(games: viewModel.searchGame)
+                 
+                    
+            }.navigationTitle(Text("Search"))
+        }.searchable(text: $searchText).onChange(of: searchText){searchText in
+            Task {
+                try await viewModel.getSearchGames(text: searchText)
+            }
+        }
+        
+            
     }
 }
 
