@@ -22,5 +22,6 @@ class GameViewModel: ObservableObject{
     func getSearchGames(text: String) async throws{
         let gamesResponse = try await gameFetcher.getSearchGames(text: text)
         searchGame = gamesResponse.games
+        
     }
 }

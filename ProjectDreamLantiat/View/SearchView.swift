@@ -19,9 +19,7 @@ struct SearchView: View {
                     
             }.navigationTitle(Text("Search"))
         }.searchable(text: $searchText).onChange(of: searchText){searchText in
-            Task {
-                try await viewModel.getSearchGames(text: searchText)
-            }
+            Task {try await viewModel.getSearchGames(text:searchText)}
         }
         
             

@@ -22,7 +22,7 @@ class GameFetcher{
     }
     
     func getSearchGames(text: String)async throws -> Games{
-        let gameURL = URL(string: gamesURLString + "&name=\(text)")!
+        let gameURL = URL(string: gamesURLString + clientID + "&name=\(text)")!
         let request = URLRequest(url: gameURL)
         let (data, _) = try await URLSession.shared.data(for: request)
         let games = try jsonDecoder.decode(Games.self, from: data)
